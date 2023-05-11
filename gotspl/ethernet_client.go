@@ -28,9 +28,9 @@ type EthernetTSPLClient struct {
 	address     string
 	isConnected bool
 	tcpclient   net.Conn
-	exit bool
-	listeners []chan *RawResponseEvent
-	wg sync.WaitGroup
+	exit        bool
+	listeners   []chan *RawResponseEvent
+	wg          sync.WaitGroup
 }
 
 func NewEthernetTSPLClient(address string) TSPLClient {
@@ -72,14 +72,14 @@ func (c *EthernetTSPLClient) IsConnected() bool {
 }
 
 func (c *EthernetTSPLClient) SendData(data []byte) error {
-	c.tcpclient.SetWriteDeadline(time.Now().Add(time.Millisecond*1000))
+	c.tcpclient.SetWriteDeadline(time.Now().Add(time.Millisecond * 1000))
 	_, err := c.tcpclient.Write(data)
 
 	return err
 }
 
 func (c *EthernetTSPLClient) ReadData(data []byte) (int, error) {
-	c.tcpclient.SetReadDeadline(time.Now().Add(time.Millisecond*1000))
+	c.tcpclient.SetReadDeadline(time.Now().Add(time.Millisecond * 1000))
 	n, err := c.tcpclient.Read(data)
 	return n, err
 }
@@ -87,7 +87,7 @@ func (c *EthernetTSPLClient) ReadData(data []byte) (int, error) {
 func (c *EthernetTSPLClient) dataReader() {
 	for {
 		if c.isConnected {
-			data  := make([]byte,1024)
+			data := make([]byte, 1024)
 			n, err := c.ReadData(data)
 			if err != nil {
 				break
@@ -104,7 +104,7 @@ func (c *EthernetTSPLClient) dataReader() {
 }
 
 func (c *EthernetTSPLClient) SendCommandSequence(commandSequence TSPLCommandSequence) error {
-	seq, err := commandSequence.getTSPLCode()
+	seq, err := commandSequence.GetTSPLCode()
 	if err != nil {
 		return err
 	}
