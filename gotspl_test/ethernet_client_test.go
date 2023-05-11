@@ -17,7 +17,7 @@ package gotspl_test
 
 import (
 	"bytes"
-	"github.com/mrgloba/gotspl/gotspl"
+	"github.com/yunxi177/gotspl/gotspl"
 	"testing"
 	"time"
 )
