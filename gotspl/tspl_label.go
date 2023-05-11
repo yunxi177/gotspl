@@ -30,7 +30,7 @@ func NewTSPLLabel() TSPLLabelBuilder {
 	return TSPLLabel{}
 }
 
-func (T TSPLLabel) getTSPLCode() ([]byte, error) {
+func (T TSPLLabel) GetTSPLCode() ([]byte, error) {
 	var buf bytes.Buffer
 	for _, c := range T.commandList {
 		msg, err := c.GetMessage()
