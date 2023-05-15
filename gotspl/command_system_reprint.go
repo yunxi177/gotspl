@@ -32,6 +32,8 @@ func ReprintCmd() ReprintBuilder {
 
 func (h ReprintImpl) GetMessage() ([]byte, error) {
 	buf := bytes.NewBufferString(REPRINT_NAME)
+	buf.WriteString(EMPTY_SPACE)
 	buf.WriteString("ON")
+	buf.Write(LINE_ENDING_BYTES)
 	return buf.Bytes(), nil
 }
